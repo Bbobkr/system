@@ -4,10 +4,20 @@
 
 ## هيكل المشروع
 
+```
+public_html/       ← جذر الموقع (يُرفع محتواه كما هو إلى public_html في هوستنغر)
+├── app/           ← الإعدادات ومنطق التطبيق — محمي بـ .htaccess من الوصول المباشر
+│   ├── config/    (config.php, db.php, env.php [غير مرفوع لـ git], env.php.example)
+│   ├── includes/  (auth.php, csrf.php, functions.php, header.php, footer.php ...)
+│   ├── modules/   (product, stock, sales, purchases, report ...)
+│   └── lang/      (ar.php, en.php)
+├── sql/           ← schema.sql و seed.sql — محمي بـ .htaccess أيضًا
+└── (صفحات الموقع: dashboard.php, login.php, products/, sales/, ...)
+```
 
-public_html/   ← جذر الموقع (يُرفع كما هو إلى public_html في هوستنغر)
-app/           ← الإعدادات ومنطق التطبيق (يجب أن يبقى خارج الوصول المباشر عبر الويب)
-sql/           ← schema.sql (الهيكل) و seed.sql (بيانات أولية: الأدوار والصلاحيات وفرع افتراضي)
+> **لماذا `app/` داخل `public_html`؟** لوحة File Manager في هوستنغر تعرض مجلد الدومين فقط،
+> لذا وُضع `app/` و`sql/` بداخله مع ملف `.htaccess` يمنع الوصول لهما عبر المتصفح
+> (`Require all denied`) — وهو ما يوفّر نفس الحماية عمليًا.
 
 
 ## التشغيل محليًا (XAMPP / Laragon)
@@ -26,9 +36,8 @@ sql/           ← schema.sql (الهيكل) و seed.sql (بيانات أولي�
 1. **قاعدة البيانات**: من hPanel → Databases → أنشئ قاعدة بيانات MySQL ومستخدمًا مخصصًا له صلاحية كاملة عليها. احفظ اسم القاعدة/المستخدم/كلمة المرور (عادة `DB_HOST` على هوستنغر هو `localhost`).
 2. استورد `sql/schema.sql` ثم `sql/seed.sql` عبر phpMyAdmin (من نفس الصفحة في hPanel).
 3. **رفع الملفات** عبر FTP (FileZilla) أو File Manager في hPanel:
-   - محتويات `public_html/` من المشروع → داخل `public_html` الخاص بالدومين على هوستنغر.
-   - مجلدي `app/` و `sql/` → كمجلدين شقيقين لـ `public_html` في جذر الحساب (وليس داخل `public_html`)، حفاظًا على عدم الوصول المباشر لهما عبر الويب.
-   - إن كانت خطتك لا تسمح بإنشاء مجلدات خارج `public_html` (بعض إعدادات النطاقات الإضافية)، انقل `app/` و `sql/` داخل `public_html` وأضف ملف `.htaccess` بداخلهما يحتوي `Require all denied` لمنع الوصول المباشر، ثم عدّل مسارات `require '../../app/...'` في أعلى كل صفحة لتطابق الموقع الجديد.
+   - ارفع **محتويات** مجلد `public_html/` من المشروع (بما فيها `app/` و`sql/`) → داخل `public_html` الخاص بالدومين على هوستنغر.
+   - لا حاجة لإنشاء أي مجلد خارج `public_html` — الحماية تتم عبر ملفات `.htaccess` الموجودة داخل `app/` و`sql/`.
 4. على الخادم، أنشئ `app/config/env.php` (انسخه من `env.php.example`) واملأ بيانات الاتصال الحقيقية بقاعدة بيانات هوستنغر بالإضافة إلى `APP_URL` (رابط الدومين الكامل) و `APP_DEBUG` = `false`.
 5. **لا ترفع أبدًا** ملف `app/config/env.php` الخاص بالتطوير المحلي إلى الخادم — أنشئ نسخة جديدة عليه مباشرة ببيانات الإنتاج.
 6. اضبط صلاحيات الملفات: المجلدات 755، الملفات 644، ومجلد `public_html/assets/uploads/products` قابل للكتابة (755 كافية عادة، تجنب 777).
