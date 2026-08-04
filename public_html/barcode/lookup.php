@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/../../app/config/config.php';
+require __DIR__ . '/../app/config/config.php';
 require_permission('products', 'view');
 
 $pageTitle = is_rtl() ? 'بحث بالباركود' : 'Barcode Lookup';

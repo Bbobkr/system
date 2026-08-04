@@ -23,8 +23,8 @@ define('DB_USER', $env['DB_USER'] ?? '');
 define('DB_PASS', $env['DB_PASS'] ?? '');
 define('DB_PORT', $env['DB_PORT'] ?? '3306');
 
-define('APP_ROOT', dirname(__DIR__, 2));
 define('APP_DIR', dirname(__DIR__));
+define('APP_ROOT', dirname(APP_DIR));
 
 // إعدادات عامة للتطبيق (يمكن نقلها لجدول settings لاحقًا للتعديل من الواجهة)
 define('DEFAULT_CURRENCY', 'ر.س');

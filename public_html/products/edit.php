@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/../../app/config/config.php';
+require __DIR__ . '/../app/config/config.php';
 require_permission('products', 'edit');
 require APP_DIR . '/modules/product.php';
 

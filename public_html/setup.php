@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/../app/config/config.php';
+require __DIR__ . '/app/config/config.php';
 
 // حماية: هذه الصفحة تعمل فقط إذا لم يوجد أي مستخدم بعد (أول تشغيل بعد استيراد قاعدة البيانات)
 try {

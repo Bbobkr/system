@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/../../app/config/config.php';
+require __DIR__ . '/../app/config/config.php';
 require_permission('users', 'edit');
 require APP_DIR . '/modules/user.php';
 require APP_DIR . '/modules/branch.php';

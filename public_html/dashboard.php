@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/../app/config/config.php';
+require __DIR__ . '/app/config/config.php';
 require_login();
 require APP_DIR . '/modules/stock.php';
 require APP_DIR . '/modules/report.php';

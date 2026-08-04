@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/../app/config/config.php';
+require __DIR__ . '/app/config/config.php';
 
 if (is_logged_in()) {
     redirect(app_path('dashboard.php'));

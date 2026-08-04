@@ -160,7 +160,7 @@ function handle_product_image_upload(string $field): ?string
     }
 
     $filename = bin2hex(random_bytes(16)) . '.' . $allowed[$mime];
-    $destDir = APP_ROOT . '/public_html/assets/uploads/products';
+    $destDir = APP_ROOT . '/assets/uploads/products';
     if (!is_dir($destDir)) {
         mkdir($destDir, 0755, true);
     }
