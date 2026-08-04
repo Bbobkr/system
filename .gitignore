@@ -1,0 +1,7 @@
+/app/config/env.php
+/public_html/assets/uploads/products/*
+!/public_html/assets/uploads/products/.htaccess
+!/public_html/assets/uploads/products/.gitkeep
+*.log
+.DS_Store
+Thumbs.db

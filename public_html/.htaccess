@@ -1,0 +1,22 @@
+# فرض HTTPS (فعّله بعد تفعيل شهادة SSL المجانية من hPanel)
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{HTTPS} off
+    RewriteCond %{HTTP:X-Forwarded-Proto} !https
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+# رؤوس أمان أساسية
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# منع عرض محتوى المجلدات
+Options -Indexes
+
+# حجب أي وصول مباشر لملفات .sql أو .log التي قد تُرفع بالخطأ
+<FilesMatch "\.(sql|log|md)$">
+    Require all denied
+</FilesMatch>

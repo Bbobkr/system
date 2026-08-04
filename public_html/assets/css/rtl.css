@@ -1,0 +1,4 @@
+/* استثناءات بسيطة للعربية RTL — معظم app.css يعتمد خصائص منطقية تعمل تلقائيًا في الاتجاهين */
+body { font-family: 'Segoe UI', Tahoma, Arial, sans-serif; }
+.sidebar { border-inline-end: 1px solid rgba(255,255,255,.08); }
+table { text-align: right; }
